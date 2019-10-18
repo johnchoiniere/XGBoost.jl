@@ -320,6 +320,8 @@ function nfold_cv(data, num_boost_round::Integer = 10, nfold::Integer = 3; label
         if verbose == true
             if i%print_every_n == 0
                 @printf(stderr, "%s\n", res)
+            end
+        end
     end
     return results
 end
