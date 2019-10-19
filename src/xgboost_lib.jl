@@ -308,7 +308,7 @@ end
 function nfold_cv(data, num_boost_round::Integer = 10, nfold::Integer = 3; label = Union{},
                   param=[], metrics=[], obj = Union{}, feval = Union{}, fpreproc = Union{},
                   show_stdv = true, seed::Integer = 0, verbose::Bool = false, print_every_n::Integer = 1, kwargs...)
-    errframe = DataFrame(Round = Int64[], Err = Int64[])
+    errframe = []
     dtrain = makeDMatrix(data, label)
     results = String[]
     cvfolds = mknfold(dtrain, nfold, param, seed, metrics, fpreproc=fpreproc, kwargs = kwargs)
@@ -319,7 +319,7 @@ function nfold_cv(data, num_boost_round::Integer = 10, nfold::Integer = 3; label
         res, err = aggcv([eval_set(f.bst, f.watchlist, i, feval = feval) for f in cvfolds],
                     show_stdv = show_stdv)
         push!(results, res)
-        push!(errframe, err)
+        push!(errframe, (i, err))
         if verbose == true
             if i % print_every_n == 0
                 @printf(stderr, "%s\n", res)
