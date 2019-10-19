@@ -299,8 +299,8 @@ function aggcv(rlist; show_stdv = true)
             ret *= @sprintf("\tcv-%s:%f+%f", k, mean(v), std(v))
         else
             ret *= @sprintf("\tcv-%s:%f", k, mean(v))
-        errval = mean(v)
         end
+        errval = mean(v)
     end
     return ret, errval
 end
