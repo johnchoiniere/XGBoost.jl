@@ -278,6 +278,7 @@ end
 
 function aggcv(rlist; show_stdv = true)
     cvmap = Dict()
+    errval = Float32()
     ret = split(rlist[1])[1]
     for line in rlist
         arr = split(line)
