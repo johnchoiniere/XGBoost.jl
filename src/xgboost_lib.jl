@@ -296,12 +296,13 @@ function aggcv(rlist; show_stdv = true)
         k = item[1]
         v = item[2]
         if show_stdv == true
-            ret *= @sprintf("\tcv-%s:%f+%f", k, mean(v), std(v)), mean(v)
+            ret *= @sprintf("\tcv-%s:%f+%f", k, mean(v), std(v))
         else
-            ret *= @sprintf("\tcv-%s:%f", k, mean(v)), mean(v)
+            ret *= @sprintf("\tcv-%s:%f", k, mean(v))
+        errval = mean(v)
         end
     end
-    return ret
+    return ret, errval
 end
 
 function nfold_cv(data, num_boost_round::Integer = 10, nfold::Integer = 3; label = Union{},
