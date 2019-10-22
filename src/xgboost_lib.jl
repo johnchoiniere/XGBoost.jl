@@ -301,7 +301,9 @@ function aggcv(rlist; show_stdv = true)
         else
             ret *= @sprintf("\tcv-%s:%f", k, mean(v))
         end
-        println(k)
+        if k[1:4] == "test"
+            errval = mean(v)
+        end
     end
     return ret, errval
 end
@@ -320,7 +322,7 @@ function nfold_cv(data, num_boost_round::Integer = 10, nfold::Integer = 3; label
         res, err = aggcv([eval_set(f.bst, f.watchlist, i, feval = feval) for f in cvfolds],
                     show_stdv = show_stdv)
         push!(results, res)
-        push!(errframe, (i, err[1]))
+        push!(errframe, (i, err))
         if verbose == true
             if i % print_every_n == 0
                 @printf(stderr, "%s\n", res)
