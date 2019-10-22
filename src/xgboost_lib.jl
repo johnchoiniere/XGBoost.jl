@@ -309,7 +309,7 @@ end
 function nfold_cv(data, num_boost_round::Integer = 10, nfold::Integer = 3; label = Union{},
                   param=[], metrics=[], obj = Union{}, feval = Union{}, fpreproc = Union{},
                   show_stdv = true, seed::Integer = 0, verbose::Bool = false, print_every_n::Integer = 1, kwargs...)
-    errframe = DataFrame(Round = Int64[], Err = Int64[])
+    errframe = DataFrame(Round = Int32[], Err = Float32[])
     dtrain = makeDMatrix(data, label)
     results = String[]
     cvfolds = mknfold(dtrain, nfold, param, seed, metrics, fpreproc=fpreproc, kwargs = kwargs)
