@@ -301,9 +301,7 @@ function aggcv(rlist; show_stdv = true)
         else
             ret *= @sprintf("\tcv-%s:%f", k, mean(v))
         end
-        if k == "test"
-            errval = mean(v)
-        end
+        println(k)
     end
     return ret, errval
 end
