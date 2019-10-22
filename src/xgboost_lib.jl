@@ -322,7 +322,7 @@ function nfold_cv(data, num_boost_round::Integer = 10, nfold::Integer = 3; label
         res, err = aggcv([eval_set(f.bst, f.watchlist, i, feval = feval) for f in cvfolds],
                     show_stdv = show_stdv)
         push!(results, res)
-        push!(errframe, (i, err))
+        push!(errframe, (i, parse(Float32, err)))
         if verbose == true
             if i % print_every_n == 0
                 @printf(stderr, "%s\n", res)
